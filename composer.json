@@ -1,0 +1,49 @@
+{
+  "name": "hoducha/wp-markdown-editor",
+  "type": "plugin",
+  "description": "Markdown Editor for Wordpress",
+  "keywords": [
+    "wordpress",
+    "markdown",
+    "editor"
+  ],
+  "homepage": "http://hoducha.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ha Ho",
+      "email": "hoducha@gmail.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "lepture/editor",
+        "version": "0.1.0",
+        "source": {
+          "url": "https://github.com/lepture/editor",
+          "type": "git",
+          "reference": "origin/master"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "erusev/parsedown",
+        "version": "1.5.0",
+        "source": {
+          "url": "https://github.com/erusev/parsedown",
+          "type": "git",
+          "reference": "origin/master"
+        }
+      }
+    }
+  ],
+  "require": {
+    "php": ">=5.3.9",
+    "lepture/editor": "0.1.0",
+    "erusev/parsedown": "1.5.0"
+  }
+}
