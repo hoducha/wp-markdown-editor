@@ -4,24 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4eed48242b679f4a1bdc660af6a85b95",
+    "hash": "62fec9b500ff31455950082fb51bc961",
     "packages": [
+        {
+            "name": "NextStepWebs/simplemde-markdown-editor",
+            "version": "1.7.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/NextStepWebs/simplemde-markdown-editor",
+                "reference": "origin/master"
+            },
+            "type": "library"
+        },
         {
             "name": "erusev/parsedown",
             "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown",
-                "reference": "origin/master"
-            },
-            "type": "library"
-        },
-        {
-            "name": "lepture/editor",
-            "version": "0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lepture/editor",
                 "reference": "origin/master"
             },
             "type": "library"

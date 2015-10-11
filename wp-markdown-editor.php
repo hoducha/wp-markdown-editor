@@ -2,11 +2,11 @@
 /*
 Plugin Name: WpMarkdownEditor - Markdown Editor for WordPress
 Plugin URI: https://github.com/hoducha/wp-markdown-editor
-Description: WpMarkdownEditor replace the visual editor with a simple Markdown editor for your posts and pages.
-Version: 1.0
+Description: WpMarkdownEditor replaces the default editor with a WYSIWYG Markdown Editor for your posts and pages.
+Version: 1.0.1
 Author: Ha Ho
 Author URI: http://hoducha.com
-License: GPLv2 or later
+License: MIT
 */
 
 // Make sure we don't expose any info if called directly
@@ -15,7 +15,7 @@ if (!function_exists('add_action')) {
     exit;
 }
 
-define('PLUGIN_VERSION', '0.1.0');
+define('PLUGIN_VERSION', '1.0.1');
 define('MINIMUM_WP_VERSION', '3.1');
 
 class WpMarkdownEditor
@@ -58,9 +58,8 @@ class WpMarkdownEditor
         // only enqueue stuff on the post editor page
         if (get_current_screen()->base !== 'post')
             return;
-        wp_enqueue_script('marked-js', $this->plugin_url('/editor/marked.js'));
-        wp_enqueue_script('markdown-editor', $this->plugin_url('/editor/editor.js'));
-        wp_enqueue_style('style-name', $this->plugin_url('/editor/editor.css'));
+        wp_enqueue_script('simplemde-js', $this->plugin_url('/vendor/NextStepWebs/simplemde-markdown-editor/dist/simplemde.min.js'));
+        wp_enqueue_style('simplemde-css', $this->plugin_url('/vendor/NextStepWebs/simplemde-markdown-editor/dist/simplemde.min.css'));
     }
 
     function modify_content_filters()
@@ -89,8 +88,9 @@ class WpMarkdownEditor
         if (get_current_screen()->base !== 'post')
             return;
         echo '<script type="text/javascript">
-                var editor = new Editor();
-                editor.render();
+                var simplemde = new SimpleMDE();
+                <!-- Change the z-index property so that the editor displays well in the full screen mode -->
+                document.getElementById("wp-content-editor-container").style.zIndex = 999999;
             </script>';
     }
 

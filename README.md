@@ -1,19 +1,11 @@
 # Markdown Editor for WordPress
 
 ## Description ##
-WpMarkdownEditor replace the visual editor with a simple Markdown editor for your posts and pages.
-WP-Markdown stores the processed HTML, so deactivating the plug-in will not affect your content.
+WpMarkdownEditor replaces the default editor with SimpleMDE editor - a beautiful and intuitive Markdown editor.
+The post and page contents are stored in the HTML format, so deactivating the plug-in will not affect to your contents.
 
 ## Installation ##
-In progress...
-
-## FAQ ##
-In progress...
+Coming soon
 
 ## Screenshots ##
-In progress...
-
-## Changelog ##
-* Disable default visual editor
-* Add markdown editor: https://github.com/lepture/editor
-* Filter content using Parsedown: https://github.com/erusev/parsedown
+Coming soon

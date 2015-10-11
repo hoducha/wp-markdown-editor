@@ -1,0 +1,28 @@
+{
+  "name": "wp-markdown-editor",
+  "version": "1.0.1",
+  "description": "Markdown Editor for Wordpress",
+  "keywords": [
+    "wordpress",
+    "markdown",
+    "editor",
+    "wysiwyg"
+  ],
+  "homepage": "https://github.com/hoducha/wp-markdown-editor",
+  "license": "MIT",
+  "author": {
+    "name": "Ha Ho",
+    "url": "http://hoducha.com"
+  },
+  "bugs": {
+    "url": "https://github.com/hoducha/wp-markdown-editor/issues"
+  },
+  "devDependencies": {
+    "NextStepWebs/simplemde-markdown-editor": "*",
+    "erusev/parsedown": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hoducha/wp-markdown-editor"
+  }
+}
