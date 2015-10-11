@@ -76,7 +76,7 @@ class WpMarkdownEditor
     {
         if (!class_exists('Parsedown')) {
             spl_autoload_register(function ($class) {
-                require_once plugin_dir_path(__FILE__) . '/parsedown/Parsedown.php';
+                require_once plugin_dir_path(__FILE__) . '/vendor/erusev/parsedown/Parsedown.php';
             });
         }
 
@@ -88,7 +88,9 @@ class WpMarkdownEditor
         if (get_current_screen()->base !== 'post')
             return;
         echo '<script type="text/javascript">
-                var simplemde = new SimpleMDE();
+                var simplemde = new SimpleMDE({
+                    spellChecker: false
+                });
                 <!-- Change the z-index property so that the editor displays well in the full screen mode -->
                 document.getElementById("wp-content-editor-container").style.zIndex = 999999;
             </script>';

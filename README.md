@@ -1,7 +1,7 @@
-# Markdown Editor for WordPress
+# WpMarkdownEditor Plugin
 
 ## Description ##
-WpMarkdownEditor replaces the default editor with SimpleMDE editor - a beautiful and intuitive Markdown editor.
+WpMarkdownEditor replaces the default editor with [SimpleMDE](https://github.com/NextStepWebs/simplemde-markdown-editor) editor - a beautiful and intuitive Markdown editor.
 The post and page contents are stored in the HTML format, so deactivating the plug-in will not affect to your contents.
 
 ## Installation ##
@@ -14,8 +14,8 @@ Coming soon
 - Upload source code to the Wordpress plugins folder
 
 ## Screenshots ##
-### Embeded Editor
-![WpMarkdownEditor main](http://i.imgur.com/zEZMnk6.jpg)
+### Embedded Editor
+![WpMarkdownEditor main](http://i.imgur.com/mLnIEDe.jpg)
 
 ### Fullscreen side by side
-![WpMarkdownEditor fullscreen](http://i.imgur.com/6lawP4i.jpg)
+![WpMarkdownEditor fullscreen](http://i.imgur.com/A6tkvTZ.jpg)
