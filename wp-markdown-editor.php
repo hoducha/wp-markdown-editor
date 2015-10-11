@@ -6,7 +6,7 @@ Description: WpMarkdownEditor replaces the default editor with a WYSIWYG Markdow
 Version: 1.0.1
 Author: Ha Ho
 Author URI: http://hoducha.com
-License: MIT
+License: GPLv2 or later
 */
 
 // Make sure we don't expose any info if called directly
