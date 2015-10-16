@@ -1,13 +1,13 @@
 <?php
-/*
-Plugin Name: WpMarkdownEditor - Markdown Editor for WordPress
-Plugin URI: https://github.com/hoducha/wp-markdown-editor
-Description: WpMarkdownEditor replaces the default editor with a WYSIWYG Markdown Editor for your posts and pages.
-Version: 1.0.1
-Author: Ha Ho
-Author URI: http://hoducha.com
-License: GPLv2 or later
-*/
+/**
+ * Plugin Name: WP Markdown Editor
+ * Plugin URI: https://github.com/hoducha/wp-markdown-editor
+ * Description: WP Markdown Editor replaces the default editor with a WYSIWYG Markdown Editor for your posts and pages.
+ * Version: 1.0.1
+ * Author: Ha Ho
+ * Website: http://www.hoducha.com
+ * License: GPLv2 or later
+ */
 
 // Make sure we don't expose any info if called directly
 if (!function_exists('add_action')) {
@@ -87,12 +87,39 @@ class WpMarkdownEditor
     {
         if (get_current_screen()->base !== 'post')
             return;
+
         echo '<script type="text/javascript">
+                // Remove the quicktags-toolbar
+                if ( typeof jQuery !== "undefined" ) {
+                    jQuery(document).ready(function(){
+                        document.getElementById("ed_toolbar").style.display = "none";
+                    });
+                }
+
+                // Init the editor
                 var simplemde = new SimpleMDE({
                     spellChecker: false
                 });
-                <!-- Change the z-index property so that the editor displays well in the full screen mode -->
-                document.getElementById("wp-content-editor-container").style.zIndex = 999999;
+
+                // Override the toggleFullScreen to change the zIndex of the editor
+                var original_toggleFullScreen = toggleFullScreen;
+                var toggleFullScreen = function(editor) {
+                    original_toggleFullScreen(editor);
+
+                    var cm = editor.codemirror;
+                    var wrap = cm.getWrapperElement();
+                    if(/fullscreen/.test(wrap.previousSibling.className)) {
+                        document.getElementById("wp-content-editor-container").style.zIndex = 999999;
+                    } else {
+                        document.getElementById("wp-content-editor-container").style.zIndex = 1;
+                    }
+                }
+
+                // Re-bind the click event of the fullscreen button
+                var fullscreenButton = document.getElementsByClassName("fa-arrows-alt");
+                fullscreenButton[0].onclick = function() {
+                    toggleFullScreen(simplemde);
+                }
             </script>';
     }
 
