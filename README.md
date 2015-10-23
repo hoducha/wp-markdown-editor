@@ -5,12 +5,12 @@ WP Markdown Editor replaces the default editor with [SimpleMDE](https://github.c
 The post and page contents are stored in the HTML format, so deactivating the plug-in will not affect to your contents.
 
 ## Installation ##
-### Install from WordPress Plugins Directory
+### From WordPress Plugins Directory
 Plugin URL: https://wordpress.org/plugins/wp-markdown-editor
 
-### For developers
+### From Github
 - Clone the project
-- Run composer update command to download the dependencies (SimpleMDE and Parsedown)
+- Run composer update command to download the dependencies
 - Upload source code to the Wordpress plugins folder
 
 ## Screenshots ##

@@ -58,6 +58,7 @@ class WpMarkdownEditor
         // only enqueue stuff on the post editor page
         if (get_current_screen()->base !== 'post')
             return;
+        wp_enqueue_script('to-markdown-js', $this->plugin_url('/vendor/domchristie/to-markdown/dist/to-markdown.js'));
         wp_enqueue_script('simplemde-js', $this->plugin_url('/vendor/NextStepWebs/simplemde-markdown-editor/dist/simplemde.min.js'));
         wp_enqueue_style('simplemde-css', $this->plugin_url('/vendor/NextStepWebs/simplemde-markdown-editor/dist/simplemde.min.css'));
     }
@@ -68,8 +69,17 @@ class WpMarkdownEditor
         remove_filter('the_excerpt', 'wpautop');
         remove_filter('the_content', 'wptexturize');
         remove_filter('the_excerpt', 'wptexturize');
-        add_filter('the_content', array($this, 'markdown_filter'));
-        add_filter('the_excerpt', array($this, 'markdown_filter'));
+
+        // add_filter('the_content', array($this, 'markdown_filter'));
+        // add_filter('the_excerpt', array($this, 'markdown_filter'));
+
+        add_filter( 'wp_insert_post_data', array( $this, 'wp_insert_post_data' ), 10, 2 );
+    }
+
+    function wp_insert_post_data($data, $postarr)
+    {
+        $data['post_content'] = $this->markdown_filter($data['post_content']);
+        return $data;
     }
 
     function markdown_filter($content)
@@ -98,6 +108,7 @@ class WpMarkdownEditor
 
                 // Init the editor
                 var simplemde = new SimpleMDE({
+                    initialValue: toMarkdown(document.getElementById("content").value),
                     spellChecker: false
                 });
 
