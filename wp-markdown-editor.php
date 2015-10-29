@@ -99,13 +99,6 @@ class WpMarkdownEditor
             return;
 
         echo '<script type="text/javascript">
-                // Remove the quicktags-toolbar
-                if ( typeof jQuery !== "undefined" ) {
-                    jQuery(document).ready(function(){
-                        document.getElementById("ed_toolbar").style.display = "none";
-                    });
-                }
-
                 // Init the editor
                 var simplemde = new SimpleMDE({
                     initialValue: toMarkdown(document.getElementById("content").value),
@@ -130,6 +123,20 @@ class WpMarkdownEditor
                 var fullscreenButton = document.getElementsByClassName("fa-arrows-alt");
                 fullscreenButton[0].onclick = function() {
                     toggleFullScreen(simplemde);
+                }
+
+                if ( typeof jQuery !== "undefined" ) {
+                    jQuery(document).ready(function(){
+                        // Remove the quicktags-toolbar
+                        document.getElementById("ed_toolbar").style.display = "none";
+
+                        // Integrate with WP Media module
+                        var original_wp_media_editor_insert = wp.media.editor.insert;
+                        wp.media.editor.insert = function( html ) {
+                            original_wp_media_editor_insert(html);
+                            simplemde.codemirror.replaceSelection(toMarkdown(html));
+                        }
+                    });
                 }
             </script>';
     }
