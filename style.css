@@ -1,0 +1,30 @@
+/*
+Description: Used to style the images which are inserted by WordPress Media module.
+*/
+
+img {
+    border: 0;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+/**
+ * 4.0 Alignment
+ */
+
+.alignleft {
+    float: left;
+    margin: 7px 28px 28px 0;
+}
+
+.alignright {
+    float: right;
+    margin: 7px 0 28px 28px;
+}
+
+.aligncenter {
+    clear: both;
+    display: block;
+    margin: 7px auto;
+}

@@ -3,7 +3,7 @@
  * Plugin Name: WP Markdown Editor
  * Plugin URI: https://github.com/hoducha/wp-markdown-editor
  * Description: WP Markdown Editor replaces the default editor with a WYSIWYG Markdown Editor for your posts and pages.
- * Version: 1.0.1
+ * Version: 2.0.0
  * Author: Ha Ho
  * Website: http://www.hoducha.com
  * License: GPLv2 or later
@@ -15,8 +15,11 @@ if (!function_exists('add_action')) {
     exit;
 }
 
-define('PLUGIN_VERSION', '1.0.1');
+define('PLUGIN_VERSION', '2.0');
 define('MINIMUM_WP_VERSION', '3.1');
+
+include_once dirname( __FILE__ ) . '/jetpack/require-lib.php';
+include dirname( __FILE__ ) . '/jetpack/markdown/easy-markdown.php';
 
 class WpMarkdownEditor
 {
@@ -35,8 +38,8 @@ class WpMarkdownEditor
         // Remove quicktags buttons
         add_filter('quicktags_settings', array($this, 'quicktags_settings'), $editorId = 'content');
 
-        // Modify content filters
-        $this->modify_content_filters();
+        // Load Jetpack Markdown module
+        $this->load_jetpack_markdown_module();
     }
 
     public static function getInstance()
@@ -61,36 +64,35 @@ class WpMarkdownEditor
         wp_enqueue_script('to-markdown-js', $this->plugin_url('/vendor/domchristie/to-markdown/dist/to-markdown.js'));
         wp_enqueue_script('simplemde-js', $this->plugin_url('/vendor/NextStepWebs/simplemde-markdown-editor/dist/simplemde.min.js'));
         wp_enqueue_style('simplemde-css', $this->plugin_url('/vendor/NextStepWebs/simplemde-markdown-editor/dist/simplemde.min.css'));
+        wp_enqueue_style('custom-css', $this->plugin_url('/style.css'));
     }
 
-    function modify_content_filters()
+    function load_jetpack_markdown_module()
     {
-        remove_filter('the_content', 'wpautop');
-        remove_filter('the_excerpt', 'wpautop');
-        remove_filter('the_content', 'wptexturize');
-        remove_filter('the_excerpt', 'wptexturize');
-
-        // add_filter('the_content', array($this, 'markdown_filter'));
-        // add_filter('the_excerpt', array($this, 'markdown_filter'));
-
-        add_filter( 'wp_insert_post_data', array( $this, 'wp_insert_post_data' ), 10, 2 );
-    }
-
-    function wp_insert_post_data($data, $postarr)
-    {
-        $data['post_content'] = $this->markdown_filter($data['post_content']);
-        return $data;
-    }
-
-    function markdown_filter($content)
-    {
-        if (!class_exists('Parsedown')) {
-            spl_autoload_register(function ($class) {
-                require_once plugin_dir_path(__FILE__) . '/vendor/erusev/parsedown/Parsedown.php';
-            });
+        // If the module is active, let's make this active for posting, period.
+        // Comments will still be optional.
+        add_filter( 'pre_option_' . WPCom_Markdown::POST_OPTION, '__return_true' );
+        function jetpack_markdown_posting_always_on() {
+            global $wp_settings_fields;
+            if ( isset( $wp_settings_fields['writing']['default'][ WPCom_Markdown::POST_OPTION ] ) ) {
+                unset( $wp_settings_fields['writing']['default'][ WPCom_Markdown::POST_OPTION ] );
+            }
         }
+        add_action( 'admin_init', 'jetpack_markdown_posting_always_on', 11 );
 
-        return Parsedown::instance()->text($content);
+        function jetpack_markdown_load_textdomain() {
+            load_plugin_textdomain( 'jetpack', false, dirname( plugin_basename( __FILE__ ) ) . '/jetpack/languages/' );
+        }
+        add_action( 'plugins_loaded', 'jetpack_markdown_load_textdomain' );
+
+        function jetpack_markdown_settings_link($actions) {
+            return array_merge(
+                array( 'settings' => sprintf( '<a href="%s">%s</a>', 'options-discussion.php#' . WPCom_Markdown::COMMENT_OPTION, __( 'Settings', 'jetpack' ) ) ),
+                $actions
+            );
+            return $actions;
+        }
+        add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'jetpack_markdown_settings_link' );
     }
 
     function init_editor()
@@ -101,7 +103,6 @@ class WpMarkdownEditor
         echo '<script type="text/javascript">
                 // Init the editor
                 var simplemde = new SimpleMDE({
-                    initialValue: toMarkdown(document.getElementById("content").value),
                     spellChecker: false
                 });
 
@@ -134,7 +135,7 @@ class WpMarkdownEditor
                         var original_wp_media_editor_insert = wp.media.editor.insert;
                         wp.media.editor.insert = function( html ) {
                             original_wp_media_editor_insert(html);
-                            simplemde.codemirror.replaceSelection(toMarkdown(html));
+                            simplemde.codemirror.replaceSelection(html);
                         }
                     });
                 }

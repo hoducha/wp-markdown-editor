@@ -1,7 +1,7 @@
 {
   "name": "hoducha/wp-markdown-editor",
   "type": "plugin",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Markdown Editor for Wordpress",
   "keywords": [
     "wordpress",
@@ -28,36 +28,10 @@
           "reference": "origin/master"
         }
       }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "erusev/parsedown",
-        "version": "1.5.0",
-        "source": {
-          "url": "https://github.com/erusev/parsedown",
-          "type": "git",
-          "reference": "origin/master"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "domchristie/to-markdown",
-        "version": "2.0.1",
-        "source": {
-          "url": "https://github.com/domchristie/to-markdown",
-          "type": "git",
-          "reference": "origin/master"
-        }
-      }
     }
   ],
   "require": {
     "php": ">=5.3.9",
-    "NextStepWebs/simplemde-markdown-editor": "1.7.4",
-    "erusev/parsedown": "1.5.0",
-    "domchristie/to-markdown": "2.0.1"
+    "NextStepWebs/simplemde-markdown-editor": "1.7.4"
   }
 }

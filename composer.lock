@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "78f49766e7c966b1cf146d202fe8fc4c",
+    "hash": "77adc523b665c924f4fe7b350b2c629d",
     "packages": [
         {
             "name": "NextStepWebs/simplemde-markdown-editor",
@@ -12,26 +12,6 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/NextStepWebs/simplemde-markdown-editor",
-                "reference": "origin/master"
-            },
-            "type": "library"
-        },
-        {
-            "name": "domchristie/to-markdown",
-            "version": "2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/domchristie/to-markdown",
-                "reference": "origin/master"
-            },
-            "type": "library"
-        },
-        {
-            "name": "erusev/parsedown",
-            "version": "1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/erusev/parsedown",
                 "reference": "origin/master"
             },
             "type": "library"
