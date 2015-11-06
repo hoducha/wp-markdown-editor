@@ -13,7 +13,7 @@ A beautiful visual Markdown editor for Wordpress
 == Description ==
 
 WP Markdown Editor replaces the default editor with SimpleMDE editor - a beautiful and intuitive Markdown editor.
-The plugin uses the [Markdown module](http://jetpack.me/support/markdown/) from [Jetpack] for parsing and saving content.
+The plugin uses the Markdown module from [Jetpack](http://jetpack.me) for parsing and saving content.
 
 If you are not familiar with Markdown, Markdown is used by writers and bloggers who want a quick and easy way to write
 rich text, without having to take their hands off the keyboard, and without learning a lot of complicated codes and shortcuts.
@@ -30,6 +30,8 @@ The plugin is open source on [GitHub](https://github.com/hoducha/wp-markdown-edi
 1. Copy the plugin directory `wp-markdown-editor` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
+Note: You don't need to install Jetpack to use this plugin.
+
 == Screenshots ==
 
 1. Main screen
@@ -45,16 +47,23 @@ to your post, in that case you can write HTML in your post.
 Yes, you can. WP Markdown Editor uses the Markdown module from Jetpack and it supports shortcodes.
 
 = How do I use Markdown syntax? =
-Please refer to this resource: [PHP Markdown Extra](http://hoducha.com/markdown-guide.html).
+Please refer to this resource: [Markdown Quick Reference](http://hoducha.com/markdown-guide.html).
 
 = How do I convert an existing post to Markdown? =
 You existing posts will display as HTML in the WP Markdown Editor. You can still update your post in HTML or you can
 convert your posts to markdown using [to-markdown](http://domchristie.github.io/to-markdown) or other available tools if you want.
 
+= Do I have to install Jetpack to use this plugin? =
+No, you don't.
+
+= Can I install both Jetpack and WP Markdown Editor on my site? =
+Yes, you can. But the order of activation should be Jetpack then WP Markdown Editor.
+
 == Changelog ==
 
 = 2.0.0 =
 * Using Markdown module from Jetpack for parsing and saving content
+* Upgrade SimpleMDE to v1.8.1
 * Added changelog and FAQ
 
 = 1.0.2 =
