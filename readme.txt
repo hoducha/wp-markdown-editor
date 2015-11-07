@@ -4,7 +4,7 @@ Donate link: http://hoducha.com/donate
 Tags: markdown, editor, wysiwyg, simplemde
 Requires at least: 3.0.1
 Tested up to: 4.3.1
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,7 +23,7 @@ Check out the [Screenshots](https://wordpress.org/plugins/wp-markdown-editor/scr
 
 The plugin is open source on [GitHub](https://github.com/hoducha/wp-markdown-editor).
 
-> If you like the plugin, feel free to [donate via PayPal](http://hoducha.com/donate) or rate it (on the right side of this page). Thanks!
+> If you like the plugin, feel free to [donate](http://hoducha.com/donate) or rate it (on the right side of this page). Thanks!
 
 == Installation ==
 
@@ -61,9 +61,11 @@ Yes, you can. But the order of activation should be Jetpack then WP Markdown Edi
 
 == Changelog ==
 
+= 2.0.1 =
+* Upgrade SimpleMDE
+
 = 2.0.0 =
 * Using Markdown module from Jetpack for parsing and saving content
-* Upgrade SimpleMDE to v1.8.1
 * Added changelog and FAQ
 
 = 1.0.2 =

@@ -1,6 +1,6 @@
 {
   "name": "wp-markdown-editor",
-  "version": "1.0.1",
+  "version": "2.0.1",
   "description": "Markdown Editor for Wordpress",
   "keywords": [
     "wordpress",
@@ -18,8 +18,7 @@
     "url": "https://github.com/hoducha/wp-markdown-editor/issues"
   },
   "devDependencies": {
-    "NextStepWebs/simplemde-markdown-editor": "*",
-    "erusev/parsedown": "*"
+    "NextStepWebs/simplemde-markdown-editor": "1.7.4",
   },
   "repository": {
     "type": "git",

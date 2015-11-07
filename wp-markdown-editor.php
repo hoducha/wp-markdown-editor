@@ -3,7 +3,7 @@
  * Plugin Name: WP Markdown Editor
  * Plugin URI: https://github.com/hoducha/wp-markdown-editor
  * Description: WP Markdown Editor replaces the default editor with a WYSIWYG Markdown Editor for your posts and pages.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: Ha Ho
  * Website: http://www.hoducha.com
  * License: GPLv2 or later
@@ -61,7 +61,6 @@ class WpMarkdownEditor
         // only enqueue stuff on the post editor page
         if (get_current_screen()->base !== 'post')
             return;
-        wp_enqueue_script('to-markdown-js', $this->plugin_url('/vendor/domchristie/to-markdown/dist/to-markdown.js'));
         wp_enqueue_script('simplemde-js', $this->plugin_url('/vendor/NextStepWebs/simplemde-markdown-editor/dist/simplemde.min.js'));
         wp_enqueue_style('simplemde-css', $this->plugin_url('/vendor/NextStepWebs/simplemde-markdown-editor/dist/simplemde.min.css'));
         wp_enqueue_style('custom-css', $this->plugin_url('/style.css'));
