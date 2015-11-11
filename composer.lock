@@ -4,19 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dc1550df9600429a68bbe4de4ab27bfc",
-    "packages": [
-        {
-            "name": "NextStepWebs/simplemde-markdown-editor",
-            "version": "1.7.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/NextStepWebs/simplemde-markdown-editor",
-                "reference": "origin/master"
-            },
-            "type": "library"
-        }
-    ],
+    "hash": "754ea78afdbfb53ef0c9d910a721dd58",
+    "packages": [],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",

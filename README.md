@@ -23,8 +23,11 @@ Plugin URL: https://wordpress.org/plugins/wp-markdown-editor
 
 ## Changelog
 
+= 2.0.2 =
+* Upgrade SimpleMDE to v1.8.1
+
 = 2.0.1 =
-* Upgrade SimpleMDE
+* Fixed some bugs
 
 = 2.0.0 =
 * Using Markdown module from Jetpack for parsing and saving content

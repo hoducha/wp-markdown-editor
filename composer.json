@@ -1,7 +1,7 @@
 {
   "name": "hoducha/wp-markdown-editor",
   "type": "plugin",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Markdown Editor for Wordpress",
   "keywords": [
     "wordpress",
@@ -16,22 +16,7 @@
       "email": "hoducha@gmail.com"
     }
   ],
-  "repositories": [
-    {
-      "type": "package",
-      "package": {
-        "name": "NextStepWebs/simplemde-markdown-editor",
-        "version": "1.7.4",
-        "source": {
-          "url": "https://github.com/NextStepWebs/simplemde-markdown-editor",
-          "type": "git",
-          "reference": "origin/master"
-        }
-      }
-    }
-  ],
   "require": {
-    "php": ">=5.3.9",
-    "NextStepWebs/simplemde-markdown-editor": "1.7.4"
+    "php": ">=5.3.9"
   }
 }

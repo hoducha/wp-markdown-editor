@@ -4,7 +4,7 @@ Donate link: http://hoducha.com/donate
 Tags: markdown, editor, wysiwyg, simplemde
 Requires at least: 3.0.1
 Tested up to: 4.3.1
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,8 +61,11 @@ Yes, you can. But the order of activation should be Jetpack then WP Markdown Edi
 
 == Changelog ==
 
+= 2.0.2 =
+* Upgrade SimpleMDE to v1.8.1
+
 = 2.0.1 =
-* Upgrade SimpleMDE
+* Fixed some bugs
 
 = 2.0.0 =
 * Using Markdown module from Jetpack for parsing and saving content

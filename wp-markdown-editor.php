@@ -3,7 +3,7 @@
  * Plugin Name: WP Markdown Editor
  * Plugin URI: https://github.com/hoducha/wp-markdown-editor
  * Description: WP Markdown Editor replaces the default editor with a WYSIWYG Markdown Editor for your posts and pages.
- * Version: 2.0.1
+ * Version: 2.0.2
  * Author: Ha Ho
  * Website: http://www.hoducha.com
  * License: GPLv2 or later
@@ -61,8 +61,8 @@ class WpMarkdownEditor
         // only enqueue stuff on the post editor page
         if (get_current_screen()->base !== 'post')
             return;
-        wp_enqueue_script('simplemde-js', $this->plugin_url('/vendor/NextStepWebs/simplemde-markdown-editor/dist/simplemde.min.js'));
-        wp_enqueue_style('simplemde-css', $this->plugin_url('/vendor/NextStepWebs/simplemde-markdown-editor/dist/simplemde.min.css'));
+        wp_enqueue_script('simplemde-js', $this->plugin_url('/simplemde/simplemde.min.js'));
+        wp_enqueue_style('simplemde-css', $this->plugin_url('/simplemde/simplemde.min.css'));
         wp_enqueue_style('custom-css', $this->plugin_url('/style.css'));
     }
 
@@ -105,27 +105,36 @@ class WpMarkdownEditor
                     spellChecker: false
                 });
 
-                // Override the toggleFullScreen to change the zIndex of the editor
-                var original_toggleFullScreen = toggleFullScreen;
-                var toggleFullScreen = function(editor) {
-                    original_toggleFullScreen(editor);
-
-                    var cm = editor.codemirror;
-                    var wrap = cm.getWrapperElement();
-                    if(/fullscreen/.test(wrap.previousSibling.className)) {
-                        document.getElementById("wp-content-editor-container").style.zIndex = 999999;
-                    } else {
-                        document.getElementById("wp-content-editor-container").style.zIndex = 1;
-                    }
+                // Change zIndex when toggle full screen
+                var change_zIndex = function(editor) {
+                    // Give it some time to finish the transition
+                    setTimeout(function() {
+                        var cm = editor.codemirror;
+                        var wrap = cm.getWrapperElement();
+                        if(/fullscreen/.test(wrap.previousSibling.className)) {
+                            document.getElementById("wp-content-editor-container").style.zIndex = 999999;
+                        } else {
+                            document.getElementById("wp-content-editor-container").style.zIndex = 1;
+                        }
+                    }, 2);
                 }
 
-                // Re-bind the click event of the fullscreen button
-                var fullscreenButton = document.getElementsByClassName("fa-arrows-alt");
-                fullscreenButton[0].onclick = function() {
-                    toggleFullScreen(simplemde);
+                var toggleFullScreenButton = document.getElementsByClassName("fa-arrows-alt");
+                toggleFullScreenButton[0].onclick = function() {
+                    SimpleMDE.toggleFullScreen(simplemde);
+                    change_zIndex(simplemde);
                 }
 
-                if ( typeof jQuery !== "undefined" ) {
+                var toggleSideBySideButton = document.getElementsByClassName("fa-columns");
+                toggleSideBySideButton[0].onclick = function() {
+                    SimpleMDE.toggleSideBySide(simplemde);
+                    change_zIndex(simplemde);
+                }
+
+                var helpButton = document.getElementsByClassName("fa-question-circle");
+                helpButton[0].href = "http://hoducha.com/markdown-guide.html";
+
+                if (typeof jQuery !== "undefined") {
                     jQuery(document).ready(function(){
                         // Remove the quicktags-toolbar
                         document.getElementById("ed_toolbar").style.display = "none";
