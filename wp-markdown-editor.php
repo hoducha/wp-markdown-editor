@@ -102,7 +102,8 @@ class WpMarkdownEditor
         echo '<script type="text/javascript">
                 // Init the editor
                 var simplemde = new SimpleMDE({
-                    spellChecker: false
+                    spellChecker: false,
+                    element: document.getElementById("content")
                 });
 
                 // Change zIndex when toggle full screen
