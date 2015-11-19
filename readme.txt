@@ -1,10 +1,10 @@
 === WP Markdown Editor ===
 Contributors: hoducha
 Donate link: http://hoducha.com/donate
-Tags: markdown, editor, wysiwyg, simplemde
+Tags: markdown, md, editor, wysiwyg, preview, simplemde, jetpack, post, posting, writing, publishing
 Requires at least: 3.0.1
 Tested up to: 4.3.1
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,10 @@ No, you don't.
 Yes, you can. But the order of activation should be Jetpack then WP Markdown Editor.
 
 == Changelog ==
+
+= 2.0.3 =
+* Detect if the Jetpack Markdown module is activated
+* Code refactoring
 
 = 2.0.2 =
 * Upgrade SimpleMDE to v1.8.1

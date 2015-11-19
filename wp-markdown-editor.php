@@ -3,7 +3,7 @@
  * Plugin Name: WP Markdown Editor
  * Plugin URI: https://github.com/hoducha/wp-markdown-editor
  * Description: WP Markdown Editor replaces the default editor with a WYSIWYG Markdown Editor for your posts and pages.
- * Version: 2.0.2
+ * Version: 2.0.3
  * Author: Ha Ho
  * Website: http://www.hoducha.com
  * License: GPLv2 or later
@@ -15,11 +15,16 @@ if (!function_exists('add_action')) {
     exit;
 }
 
+if (!function_exists('jetpack_require_lib')) {
+    include_once dirname( __FILE__ ) . '/jetpack/require-lib.php';
+}
+
+if (!class_exists('WPCom_Markdown')) {
+    include_once dirname( __FILE__ ) . '/jetpack/markdown/easy-markdown.php';
+}
+
 define('PLUGIN_VERSION', '2.0');
 define('MINIMUM_WP_VERSION', '3.1');
-
-include_once dirname( __FILE__ ) . '/jetpack/require-lib.php';
-include dirname( __FILE__ ) . '/jetpack/markdown/easy-markdown.php';
 
 class WpMarkdownEditor
 {
@@ -59,8 +64,10 @@ class WpMarkdownEditor
     function enqueue_stuffs()
     {
         // only enqueue stuff on the post editor page
-        if (get_current_screen()->base !== 'post')
+        if (get_current_screen()->base !== 'post') {
             return;
+        }
+
         wp_enqueue_script('simplemde-js', $this->plugin_url('/simplemde/simplemde.min.js'));
         wp_enqueue_style('simplemde-css', $this->plugin_url('/simplemde/simplemde.min.css'));
         wp_enqueue_style('custom-css', $this->plugin_url('/style.css'));
@@ -70,34 +77,39 @@ class WpMarkdownEditor
     {
         // If the module is active, let's make this active for posting, period.
         // Comments will still be optional.
-        add_filter( 'pre_option_' . WPCom_Markdown::POST_OPTION, '__return_true' );
-        function jetpack_markdown_posting_always_on() {
-            global $wp_settings_fields;
-            if ( isset( $wp_settings_fields['writing']['default'][ WPCom_Markdown::POST_OPTION ] ) ) {
-                unset( $wp_settings_fields['writing']['default'][ WPCom_Markdown::POST_OPTION ] );
-            }
-        }
-        add_action( 'admin_init', 'jetpack_markdown_posting_always_on', 11 );
+        add_filter('pre_option_' . WPCom_Markdown::POST_OPTION, '__return_true');
+        add_action('admin_init', array($this, 'jetpack_markdown_posting_always_on'), 11);
+        add_action('plugins_loaded', array($this, 'jetpack_markdown_load_textdomain'));
+        add_filter('plugin_action_links_' . plugin_basename(__FILE__), array($this, 'jetpack_markdown_settings_link'));
+    }
 
-        function jetpack_markdown_load_textdomain() {
-            load_plugin_textdomain( 'jetpack', false, dirname( plugin_basename( __FILE__ ) ) . '/jetpack/languages/' );
+    function jetpack_markdown_posting_always_on()
+    {
+        global $wp_settings_fields;
+        if (isset($wp_settings_fields['writing']['default'][ WPCom_Markdown::POST_OPTION ])) {
+            unset($wp_settings_fields['writing']['default'][ WPCom_Markdown::POST_OPTION ]);
         }
-        add_action( 'plugins_loaded', 'jetpack_markdown_load_textdomain' );
+    }
 
-        function jetpack_markdown_settings_link($actions) {
-            return array_merge(
-                array( 'settings' => sprintf( '<a href="%s">%s</a>', 'options-discussion.php#' . WPCom_Markdown::COMMENT_OPTION, __( 'Settings', 'jetpack' ) ) ),
-                $actions
-            );
-            return $actions;
-        }
-        add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'jetpack_markdown_settings_link' );
+    function jetpack_markdown_load_textdomain()
+    {
+        load_plugin_textdomain('jetpack', false, dirname( plugin_basename( __FILE__ ) ) . '/jetpack/languages/');
+    }
+
+    function jetpack_markdown_settings_link($actions)
+    {
+        return array_merge(
+            array('settings' => sprintf('<a href="%s">%s</a>', 'options-discussion.php#' . WPCom_Markdown::COMMENT_OPTION, __('Settings', 'jetpack'))),
+            $actions
+        );
+        return $actions;
     }
 
     function init_editor()
     {
-        if (get_current_screen()->base !== 'post')
+        if (get_current_screen()->base !== 'post') {
             return;
+        }
 
         echo '<script type="text/javascript">
                 // Init the editor

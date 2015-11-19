@@ -1,6 +1,6 @@
 {
   "name": "wp-markdown-editor",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Markdown Editor for Wordpress",
   "keywords": [
     "wordpress",
@@ -9,7 +9,7 @@
     "wysiwyg"
   ],
   "homepage": "https://github.com/hoducha/wp-markdown-editor",
-  "license": "MIT",
+  "license": "GPLv2 or later",
   "author": {
     "name": "Ha Ho",
     "url": "http://hoducha.com"
